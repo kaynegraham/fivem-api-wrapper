@@ -29,7 +29,7 @@ export function getMockData(): ServerStatistics {
         { id: 1, name: "Kayne", steamName: "devkayne" },
         { id: 2, name: "Hire Me", steamName: "itcompany" },
       ],
-      playerCount: 5,
+      playerCount: 2,
       maxPlayers: 64,
     },
   };
