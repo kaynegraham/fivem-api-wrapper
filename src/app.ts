@@ -6,7 +6,30 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Log every request
+app.use((req, _res, next) => {
+  let timestamp: string = new Date().toISOString();
+  console.log(`${timestamp} ${req.method} ${req.url}`);
+  next();
+});
+
 app.use("/", healthRoutes);
 app.use("/health", healthRoutes);
 app.use("/server", serverRoute);
-app.use((_req, res) => res.status(404).json({ error: "Not Found" }));
+
+// Error Handler
+app.use(
+  (
+    err: unknown,
+    _req: express.Request,
+    res: express.Response,
+    _next: express.NextFunction,
+  ) => {
+    console.error("Unhandled error:", err);
+    res.status(500).json({
+      ok: false,
+      error: "Internal Service Error",
+      details: err,
+    });
+  },
+);

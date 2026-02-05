@@ -1,8 +1,13 @@
 import { Router } from "express";
+import {
+  healthRoot,
+  showStatus,
+  testError,
+} from "../controllers/healthController";
 const router = Router();
 
-router.get("/", (_req, res) => {
-  res.json({ message: "API is running" });
-});
+router.get("/", healthRoot);
+router.get("/error", testError);
+router.get("/status", showStatus);
 
 export default router;

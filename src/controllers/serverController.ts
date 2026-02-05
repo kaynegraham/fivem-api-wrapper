@@ -16,7 +16,7 @@ export function getServerPlayers(_req: Request, res: Response) {
   res.json(fetchPlayers());
 }
 export function getServerUptime(_req: Request, res: Response) {
-  res.json(fetchUptime());
+  fetchUptime();
 }
 
 export function createPlayer(req: Request, res: Response) {
