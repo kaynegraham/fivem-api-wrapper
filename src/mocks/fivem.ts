@@ -18,21 +18,19 @@ export type ServerStatistics = {
 
 const startTime = Date.now();
 
-const mockData: ServerStatistics = {
-  ok: true,
-  server: {
-    name: "Test API Data",
-    map: "AOP: Los Santos",
-    upTime: Math.floor((Date.now() - startTime) / 1000),
-    players: [
-      { id: 1, name: "Kayne", steamName: "devkayne" },
-      { id: 2, name: "Hire Me", steamName: "itcompany" },
-    ],
-    playerCount: 5,
-    maxPlayers: 64,
-  },
-};
-
-export function getMockData() {
-  return { mockData };
+export function getMockData(): ServerStatistics {
+  return {
+    ok: true,
+    server: {
+      name: "Test API Data",
+      map: "AOP: Los Santos",
+      upTime: Math.floor((Date.now() - startTime) / 1000),
+      players: [
+        { id: 1, name: "Kayne", steamName: "devkayne" },
+        { id: 2, name: "Hire Me", steamName: "itcompany" },
+      ],
+      playerCount: 5,
+      maxPlayers: 64,
+    },
+  };
 }
