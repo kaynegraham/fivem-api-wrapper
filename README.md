@@ -10,6 +10,7 @@ learning TypeScript, API design, and backend fundamentals.
 ---
 
 ## Goals
+
 - Learn TypeScript in a real backend project
 - Build a clean Express-based API
 - Fetch data from a configured FiveM server
@@ -19,24 +20,15 @@ learning TypeScript, API design, and backend fundamentals.
 ---
 
 ## Tech Stack
+
 - Node.js
 - Express
 - TypeScript
 
 ---
 
-## Why TypeScript?
-TypeScript adds static typing on top of JavaScript, allowing:
-- Better error detection during development
-- Clearer data contracts between components
-- Improved maintainability and refactoring safety
-
-This project uses TypeScript to build stronger backend and systems-oriented
-habits that translate well to cloud, DevOps, and infrastructure roles.
-
----
-
 ## Status
+
 🚧 Early-stage learning project  
 This repository is a work in progress and will evolve as features and
 understanding improve.
@@ -44,6 +36,7 @@ understanding improve.
 ---
 
 ## Planned Features
+
 - Configurable FiveM server connection
 - REST endpoints for server status and player data
 - Basic validation and error handling
