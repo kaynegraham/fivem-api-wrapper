@@ -1,36 +1,28 @@
-export type Player = {
-  id: number;
-  name: string;
-  steamName: string;
-};
-
-export type ServerStatistics = {
-  ok: boolean;
-  server: {
-    name: string;
-    map: string;
-    upTime: number;
-    players: Player[];
-    playerCount: number;
-    maxPlayers: number;
-  };
-};
-
+import { Player } from "../types/fivem";
 const startTime = Date.now();
 
-export function getMockData(): ServerStatistics {
+const players: Player[] = [
+  { id: 1, name: "Kayne", steamName: "devkayne" },
+  { id: 2, name: "Hire Me", steamName: "itcompany" },
+];
+
+export function getMockInformation() {
   return {
-    ok: true,
-    server: {
-      name: "Test API Data",
-      map: "AOP: Los Santos",
-      upTime: Math.floor((Date.now() - startTime) / 1000),
-      players: [
-        { id: 1, name: "Kayne", steamName: "devkayne" },
-        { id: 2, name: "Hire Me", steamName: "itcompany" },
-      ],
-      playerCount: 2,
-      maxPlayers: 64,
-    },
+    name: "Test API",
+    map: "Test MAP Name",
+    maxPlayers: 64,
+  };
+}
+
+export function getMockPlayers() {
+  return {
+    players,
+    playerCount: players.length,
+  };
+}
+
+export function getMockUptime() {
+  return {
+    uptimeSeconds: Math.floor((Date.now() - startTime) / 1000),
   };
 }

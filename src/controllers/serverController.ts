@@ -1,6 +1,18 @@
 import { Request, Response } from "express";
-import { getMockData } from "../mocks/fivem";
+import {
+  fetchServerInfo,
+  fetchPlayers,
+  fetchUptime,
+} from "../services/serverService";
 
-export async function getServerStatus(_req: Request, res: Response) {
-  res.json(getMockData());
+export function getServerInfo(_req: Request, res: Response) {
+  res.json(fetchServerInfo());
+}
+
+export function getServerPlayers(_req: Request, res: Response) {
+  res.json(fetchPlayers());
+}
+
+export function getServerUptime(_req: Request, res: Response) {
+  res.json(fetchUptime());
 }

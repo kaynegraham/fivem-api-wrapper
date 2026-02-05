@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { getServerStatus } from "../controllers/serverController";
+import {
+  getServerInfo,
+  getServerPlayers,
+  getServerUptime,
+} from "../controllers/serverController";
 
 const router = Router();
 
-router.get("/status", getServerStatus);
+router.get("/info", getServerInfo);
+router.get("/players", getServerPlayers);
+router.get("/uptime", getServerUptime);
 
 export default router;
