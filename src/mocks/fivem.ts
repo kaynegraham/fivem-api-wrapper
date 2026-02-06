@@ -7,16 +7,16 @@ let players: Player[] = [
 
 export function getMockInformation() {
   return {
-    name: "Test API",
-    map: "Test MAP Name",
-    maxPlayers: 64,
+    name: "Test API", // return unknown if not found by real api data
+    map: "Test MAP Name", // return map not found if not found by real data
+    maxPlayers: 64, // return null if not found by real data
   };
 }
 
 export function getMockPlayers() {
   return {
-    players,
-    playerCount: players.length,
+    players, // return dynamic.clients, format each player through the player type
+    playerCount: players.length, // use dynamic.clients if multiple fivem (tests required) use similar/same endpoints
   };
 }
 
@@ -30,3 +30,5 @@ export function mockPlayerJoin(player: Player) {
 export function mockPlayerLeave(id: number) {
   players = players.filter((p) => p.id !== id);
 }
+
+//
