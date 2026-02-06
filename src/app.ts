@@ -1,23 +1,25 @@
+// Required dependencies
 import express from "express";
 import cors from "cors";
 import healthRoutes from "./routes/health";
-import serverRoute from "./routes/server";
+import serverRoutes from "./routes/server";
 export const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Log every request
-app.use((req, _res, next) => {
-  let timestamp: string = new Date().toISOString();
+// Log every request for api usage
+app.use((req, res, next) => {
+  let timestamp = new Date().toISOString();
   console.log(`${timestamp} ${req.method} ${req.url}`);
   next();
 });
 
+// Routes for health & server controllers
 app.use("/", healthRoutes);
 app.use("/health", healthRoutes);
-app.use("/server", serverRoute);
+app.use("/server", serverRoutes);
 
-// Error Handler
+// Error Handler, describes error with it
 app.use(
   (
     err: unknown,
@@ -28,7 +30,7 @@ app.use(
     console.error("Unhandled error:", err);
     res.status(500).json({
       ok: false,
-      error: "Internal Service Error",
+      error: "Error:",
       details: err,
     });
   },

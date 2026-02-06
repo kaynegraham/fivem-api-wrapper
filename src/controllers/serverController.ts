@@ -8,14 +8,14 @@ import {
 } from "../services/serverService";
 import { playerSchema } from "../mocks/playerSchema";
 
-export function getServerInfo(_req: Request, res: Response) {
+export function getServerInfo(res: Response) {
   res.json(fetchServerInfo());
 }
 
-export function getServerPlayers(_req: Request, res: Response) {
+export function getServerPlayers(res: Response) {
   res.json(fetchPlayers());
 }
-export function getServerUptime(_req: Request, res: Response) {
+export function getServerUptime() {
   fetchUptime();
 }
 

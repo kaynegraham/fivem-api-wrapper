@@ -1,8 +1,6 @@
 # FiveM API Wrapper (TypeScript)
 
-A beginner-friendly Node.js + Express API wrapper written in TypeScript,
-designed to fetch and expose basic FiveM server data for use in external
-applications such as Discord bots.
+A project I am creating to learn typescript and how to create simple application platform interfaces.
 
 This project is intentionally kept simple and readable, focusing on
 learning TypeScript, API design, and backend fundamentals.
