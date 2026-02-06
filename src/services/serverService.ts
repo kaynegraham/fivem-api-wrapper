@@ -1,7 +1,6 @@
 import {
   getMockPlayers,
   getMockInformation,
-  getMockUptime,
   mockPlayerJoin,
   mockPlayerLeave,
 } from "../mocks/fivem";
@@ -13,10 +12,6 @@ export function fetchServerInfo() {
 
 export function fetchPlayers() {
   return getMockPlayers();
-}
-
-export function fetchUptime() {
-  return getMockUptime();
 }
 
 export function addPlayer(player: PlayerInput) {

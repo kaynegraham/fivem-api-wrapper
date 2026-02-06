@@ -4,21 +4,16 @@ import {
   fetchPlayers,
   addPlayer,
   removePlayer,
-  fetchUptime,
 } from "../services/serverService";
 import { playerSchema } from "../mocks/playerSchema";
 
-export function getServerInfo(res: Response) {
+export function getServerInfo(_req: Request, res: Response) {
   res.json(fetchServerInfo());
 }
 
-export function getServerPlayers(res: Response) {
+export function getServerPlayers(_req: Request, res: Response) {
   res.json(fetchPlayers());
 }
-export function getServerUptime() {
-  fetchUptime();
-}
-
 export function createPlayer(req: Request, res: Response) {
   const result = playerSchema.safeParse(req.body);
   if (!result.success) {

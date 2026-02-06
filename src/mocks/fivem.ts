@@ -21,12 +21,6 @@ export function getMockPlayers() {
   };
 }
 
-export function getMockUptime() {
-  return {
-    uptimeSeconds: Math.floor((Date.now() - startTime) / 1000),
-  };
-}
-
 export function mockPlayerJoin(player: Player) {
   const exists = players.some((p) => p.id === player.id);
   if (!exists) {
