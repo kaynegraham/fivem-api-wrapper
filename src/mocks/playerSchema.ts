@@ -5,6 +5,7 @@ export const playerSchema = z.object({
   id: z.number(),
   name: z.string().min(1),
   steamName: z.string().min(1),
+  ping: z.number(),
 });
 
 export type PlayerInput = z.infer<typeof playerSchema>;

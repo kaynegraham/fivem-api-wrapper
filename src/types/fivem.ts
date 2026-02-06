@@ -2,6 +2,7 @@ export type Player = {
   id: number;
   name: string;
   steamName: string;
+  ping: number;
 };
 
 export type ServerInformation = {

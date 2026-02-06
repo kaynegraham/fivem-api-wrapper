@@ -1,9 +1,8 @@
 import { Player } from "../types/fivem";
-const startTime = Date.now();
 
 let players: Player[] = [
-  { id: 1, name: "Kayne", steamName: "devkayne" },
-  { id: 2, name: "Hire Me", steamName: "itcompany" },
+  { id: 1, name: "Kayne", steamName: "devkayne", ping: 0 },
+  { id: 2, name: "Hire Me", steamName: "itcompany", ping: 50 },
 ];
 
 export function getMockInformation() {
