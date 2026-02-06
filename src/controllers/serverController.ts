@@ -6,9 +6,9 @@ import {
   removePlayer,
 } from "../services/serverService";
 import { playerSchema } from "../mocks/playerSchema";
-
+import { fetchFiveMData } from "../adapters/fivemAdapter";
 export function getServerInfo(_req: Request, res: Response) {
-  res.json(fetchServerInfo());
+  fetchFiveMData();
 }
 
 export function getServerPlayers(_req: Request, res: Response) {
