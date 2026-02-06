@@ -1,5 +1,8 @@
-import { Request, Response } from "express";
 import { config } from "../config/env";
+const endPoints = [
+  `${config.FIVEM_BASE_URL}/info.json`,
+  `${config.FIVEM_BASE_URL}/players.json`,
+];
 
 export async function fetchFiveMData() {
   const baseURL = config.FIVEM_BASE_URL;
@@ -11,18 +14,21 @@ export async function fetchFiveMData() {
   }
 
   try {
-    const response = await fetch(`${config.FIVEM_BASE_URL}/info.json`);
-    console.log(response.status);
+    const apiPromise = endPoints.map((endpoint) =>
+      fetch(endpoint).then((response) => {
+        if (response.status !== 200) {
+          throw new Error(
+            `Issue with fetching FiveM Data, Error: ${response.status}`,
+          );
+        }
+        return response.json();
+      }),
+    );
 
-    if (response.status !== 200) {
-      throw new Error(
-        `Issue with fetching FiveM Data, Error: ${response.status}`,
-      );
-    }
-
-    const data = await response.json();
-    console.log(data);
+    const [information, players] = await Promise.all(apiPromise);
+    return { information, players };
   } catch (e) {
     console.error(e);
+    throw e;
   }
 }

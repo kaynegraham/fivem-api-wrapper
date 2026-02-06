@@ -1,45 +1,7 @@
 import { Request, Response } from "express";
-import {
-  fetchServerInfo,
-  fetchPlayers,
-  addPlayer,
-  removePlayer,
-} from "../services/serverService";
-import { playerSchema } from "../mocks/playerSchema";
-import { fetchFiveMData } from "../adapters/fivemAdapter";
-export function getServerInfo(_req: Request, res: Response) {
-  fetchFiveMData();
-}
+import { fetchServerInfo } from "../services/serverService";
 
-export function getServerPlayers(_req: Request, res: Response) {
-  res.json(fetchPlayers());
-}
-export function createPlayer(req: Request, res: Response) {
-  const result = playerSchema.safeParse(req.body);
-  if (!result.success) {
-    return res.status(400).json({
-      ok: false,
-      error: "Invalid player data",
-      details: result.error,
-    });
-  }
-
-  addPlayer(result.data);
-
-  res.status(201).json({ ok: true });
-}
-
-export function deletePlayer(req: Request, res: Response) {
-  const id = Number(req.params.id);
-
-  if (isNaN(id)) {
-    return res.status(400).json({
-      ok: false,
-      error: "Invalid player data",
-    });
-  }
-
-  removePlayer(id);
-
-  res.json({ ok: true });
+export async function getServerInfo(_req: Request, res: Response) {
+  const serverInfo = await fetchServerInfo();
+  res.json(serverInfo);
 }

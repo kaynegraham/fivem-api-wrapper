@@ -1,3 +1,4 @@
+import { fetchFiveMData } from "../adapters/fivemAdapter";
 import {
   getMockPlayers,
   getMockInformation,
@@ -6,7 +7,11 @@ import {
 } from "../mocks/fivem";
 import { PlayerInput } from "../mocks/playerSchema";
 
-export function fetchServerInfo() {
+export async function fetchServerInfo() {
+  const data = await fetchFiveMData();
+  return data;
+}
+export async function fetchMockData() {
   return getMockInformation();
 }
 
