@@ -28,7 +28,7 @@ app.use(
     _next: express.NextFunction,
   ) => {
     console.error("Unhandled error:", err);
-    res.status(500).json({
+    res.status(502).json({
       ok: false,
       error: "Error:",
       details: err,

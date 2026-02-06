@@ -1,32 +1,30 @@
 import { config } from "../config/env";
-const endPoints = [
-  `${config.FIVEM_BASE_URL}/info.json`,
-  `${config.FIVEM_BASE_URL}/players.json`,
-];
+import { safeFetchJson } from "../utils/safeFetch";
+const endPoints = ["dynamic.json", "players.json"];
 
 export async function fetchFiveMData() {
-  const baseURL = config.FIVEM_BASE_URL;
+  const baseURL = new URL(config.FIVEM_BASE_URL);
+  let endpointURL;
 
   if (!baseURL) {
     throw new Error(
-      `No FiveM Base URL configured in .env file, please re-configure and try-again.`,
+      `FiveM_Base_URL error: Ensure your .env document matches the format of the example provided in the root folder.`,
     );
   }
 
   try {
-    const apiPromise = endPoints.map((endpoint) =>
-      fetch(endpoint).then((response) => {
-        if (response.status !== 200) {
-          throw new Error(
-            `Issue with fetching FiveM Data, Error: ${response.status}`,
-          );
+    const tryPromise = endPoints.map((endpoint) => {
+      endpointURL = `${baseURL}${endpoint}`;
+      safeFetchJson(endpointURL, config.FIVEM_TIMEOUT).then((response) => {
+        if (!response) {
+          throw new Error(`Issue with fetching FiveM Data`);
         }
-        return response.json();
-      }),
-    );
+        return response;
+      });
+    });
 
-    const [information, players] = await Promise.all(apiPromise);
-    return { information, players };
+    const [dynamic, players] = await Promise.allSettled(tryPromise);
+    return { dynamic, players };
   } catch (e) {
     console.error(e);
     throw e;
