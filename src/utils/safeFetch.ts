@@ -10,6 +10,14 @@ export async function safeFetchJson(url: URL, timeoutMs: number) {
   try {
     res = await fetch(url, { signal: controller.signal });
     const data = await res.json();
+
+    if (res.status !== 200) {
+      clearTimeout(timeout);
+      throw new Error(
+        `Issue with fetching FiveM Data, Error Code: ${res.status}`,
+      );
+    }
+
     return { status: res.status, data };
   } catch (e) {
     clearTimeout(timeout);
