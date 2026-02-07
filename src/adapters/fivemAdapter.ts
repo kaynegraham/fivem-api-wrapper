@@ -16,10 +16,12 @@ export async function fetchFiveMData() {
     const tryPromise = endPoints.map((endpoint) => {
       endpointURL = `${baseURL}${endpoint}`;
       safeFetchJson(endpointURL, config.FIVEM_TIMEOUT).then((response) => {
-        if (!response) {
-          throw new Error(`Issue with fetching FiveM Data`);
+        if (response.status !== 200) {
+          throw new Error(
+            `Issue with fetching FiveM Data, Error Code: ${response.status}`,
+          );
         }
-        return response;
+        return tryPromise && response;
       });
     });
 

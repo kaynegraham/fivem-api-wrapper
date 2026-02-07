@@ -11,9 +11,11 @@ export async function safeFetchJson(url: string, timeoutMs: number) {
     res = await fetch(url, { signal: controller.signal });
     // turn to json and return
     const data = await res.json(); // data.status doesnt exist on these responses
-    return data;
+    return { status: res.status, data };
   } catch (e) {
     clearTimeout(timeout);
     throw e;
+  } finally {
+    clearTimeout(timeout);
   }
 }
