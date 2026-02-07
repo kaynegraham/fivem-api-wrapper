@@ -1,10 +1,8 @@
 import { config } from "../config/env";
+import { parseFivem } from "../utils/parseFivem";
 import { safeFetchJson } from "../utils/safeFetch";
-const endPoints = ["dynamic.json", "players.json"];
 
-export async function fetchFiveMData() {
-  let baseURL: URL;
-
+export async function fetchFiveMData(baseURL: URL) {
   try {
     baseURL = new URL(config.FIVEM_BASE_URL);
   } catch {
@@ -13,25 +11,14 @@ export async function fetchFiveMData() {
     );
   }
 
-  try {
-    const tryPromise = endPoints.map((endpoint) => {
-      const endpointURL = new URL(endpoint, baseURL).toString();
-      return safeFetchJson(endpointURL, config.FIVEM_TIMEOUT).then(
-        (response) => {
-          if (response.status !== 200) {
-            throw new Error(
-              `Issue with fetching FiveM Data, Error Code: ${response.status}`,
-            );
-          }
-          return response;
-        },
-      );
-    });
-    // Wait for results
-    const results = await Promise.allSettled(tryPromise);
-    return results;
-  } catch (e) {
-    console.error(e);
-    throw e;
-  }
+  const dynamicURL = new URL("/dynamic.json", baseURL);
+  const playersURL = new URL("/players.json", baseURL);
+
+  const getDynamic = async (dynamicURL: URL) =>
+    safeFetchJson(dynamicURL, config.FIVEM_TIMEOUT);
+
+  const getPlayers = async (playersURL: URL) =>
+    safeFetchJson(playersURL, config.FIVEM_TIMEOUT);
+
+  return { dynamic: getDynamic(dynamicURL), players: getPlayers(playersURL) };
 }

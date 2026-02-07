@@ -1,7 +1,6 @@
 export type Player = {
-  id: number;
   name: string;
-  steamName: string;
+  id: string;
   ping: number;
 };
 
@@ -12,10 +11,11 @@ export type ServerInformation = {
 };
 
 export type ServerPlayers = {
+  onlinePlayers: number;
   players: Player[];
-  playerCount: number;
 };
 
-export type ServerUpTime = {
-  upTimeSeconds: number;
+export type ServerStatus = {
+  online: boolean;
+  degraded: boolean;
 };
