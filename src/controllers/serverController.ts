@@ -11,6 +11,5 @@ export async function getServerInfo(_req: Request, res: Response) {
       error: e,
     });
     console.error(e);
-    throw e;
   }
 }
