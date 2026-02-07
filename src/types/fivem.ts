@@ -7,6 +7,7 @@ export type Player = {
 export type ServerInformation = {
   name: string;
   map: string;
+  currentPlayers: number;
   maxPlayers: number;
 };
 
