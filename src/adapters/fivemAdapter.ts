@@ -1,5 +1,4 @@
 import { config } from "../config/env";
-import { parseFivem } from "../utils/parseFivem";
 import { safeFetchJson } from "../utils/safeFetch";
 
 export async function fetchFiveMData(baseURL: URL) {
