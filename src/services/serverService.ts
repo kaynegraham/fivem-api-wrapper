@@ -3,8 +3,11 @@ import { parseFivem } from "../utils/parseFivem";
 import { config } from "../config/env";
 
 export async function fetchServerInfo() {
-  const dynamic = await getDynamic(config.FIVEM_BASE_URL);
-  const players = await getPlayers(config.FIVEM_BASE_URL);
+  const baseURl = config.FIVEM_BASE_URL;
+  const [dynamic, players] = await Promise.allSettled([
+    getDynamic(baseURl),
+    getPlayers(baseURl),
+  ]);
   const parsed = parseFivem(dynamic, players);
   return parsed;
 }

@@ -4,10 +4,11 @@ import { fetchServerInfo } from "../services/serverService";
 export async function getServerInfo(_req: Request, res: Response) {
   try {
     const serverInfo = await fetchServerInfo();
-    res.json(serverInfo);
+    res.json({ ok: true, data: serverInfo });
   } catch (e) {
     res.status(502).json({
-      description: `API couldn't fetch the data in time.`,
+      ok: false,
+      description: `Upstream error`,
       error: e,
     });
     console.error(e);
