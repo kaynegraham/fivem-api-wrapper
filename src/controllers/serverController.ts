@@ -4,7 +4,11 @@ import { fetchServerInfo } from "../services/serverService";
 export async function getServerInfo(_req: Request, res: Response) {
   try {
     const serverInfo = await fetchServerInfo();
-    res.json({ ok: true, data: serverInfo });
+    res.json({
+      ok: true,
+      data: serverInfo.data,
+      degraded: serverInfo.degraded,
+    });
   } catch (e) {
     res.status(502).json({
       ok: false,

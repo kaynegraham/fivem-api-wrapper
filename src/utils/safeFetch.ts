@@ -18,9 +18,9 @@ export async function safeFetchJson(url: URL, timeoutMs: number) {
       );
     }
 
-    return { status: res.status, data };
+    return { status: res.status, data: data };
   } catch (e) {
-    clearTimeout(timeout);
+    console.error(e);
     throw e;
   } finally {
     clearTimeout(timeout);
