@@ -1,4 +1,3 @@
-import { ok } from "node:assert";
 import { config } from "../config/env";
 import { safeFetchJson } from "../utils/safeFetch";
 
@@ -41,14 +40,14 @@ export async function getUpstreamHealth() {
   const dynamicURL = new URL("dynamic.json", base);
   const playersURL = new URL("players.json", base);
 
-  const [dynamic, players] = await Promise.allSettled([
+  const [dynamic, player] = await Promise.allSettled([
     ping(dynamicURL),
     ping(playersURL),
   ]);
 
   return {
     dynamic: dynamic.status === "fulfilled" ? dynamic.value : { ok: false },
-    players: dynamic.status === "fulfilled" ? dynamic.value : { ok: false },
-    degraded: dynamic.status !== "fulfilled" || players.status !== "fulfilled",
+    players: player.status === "fulfilled" ? player.value : { ok: false },
+    degraded: dynamic.status !== "fulfilled" || player.status !== "fulfilled",
   };
 }
