@@ -28,10 +28,7 @@ export async function getServerInfo(_req: Request, res: Response) {
     const serverInfo = await fetchServerInfo();
     res.json({
       ok: true,
-      serverName: serverInfo.name,
-      serverMapName: serverInfo.map,
-      serverCurPlayers: serverInfo.currentPlayers,
-      serverMaxPlayers: serverInfo.maxPlayers,
+      data: serverInfo,
     });
   } catch (e) {
     res.status(502).json({
