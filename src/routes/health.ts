@@ -1,13 +1,8 @@
 import { Router } from "express";
-import {
-  healthRoot,
-  showStatus,
-  testError,
-} from "../controllers/healthController";
+import { showStatus } from "../controllers/healthController";
 const router = Router();
 
-router.get("/", healthRoot);
-router.get("/error", testError);
+router.get("/", showStatus);
 router.get("/status", showStatus);
 
 export default router;

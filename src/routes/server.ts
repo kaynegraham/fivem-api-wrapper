@@ -7,6 +7,7 @@ import {
 
 const router = Router();
 
+router.get("/", getServerStatus);
 router.get("/info", getServerInfo);
 router.get("/players", getServerPlayers);
 router.get("/status", getServerStatus);
