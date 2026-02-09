@@ -30,3 +30,25 @@ export function parseFivem(rawDynamic: any, rawPlayers: any) {
 
   return { data: { serverInfo, playerInfo }, degraded };
 }
+
+export function parseServerInfo(rawDynamic: any): ServerInformation {
+  const data =
+    rawDynamic?.status === "fulfilled" ? rawDynamic.value.data : null;
+
+  return {
+    name: data?.hostname || "Unknown Server Name",
+    map: data?.mapname || "Unknown Map",
+    currentPlayers: data?.clients || 0,
+    maxPlayers: data?.sv_maxclients || 0,
+  };
+}
+
+export function parsePlayers(rawPlayers: any): Player[] {
+  const data = rawPlayers?.status === "fulfilled" ? rawPlayers.value.data : [];
+
+  return (data ?? []).map((item: any) => ({
+    name: item.name ?? "Unknown Player Name",
+    id: item.id ?? "Unknown Player ID",
+    ping: item.ping ?? 0,
+  }));
+}

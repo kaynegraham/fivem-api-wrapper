@@ -1,8 +1,14 @@
 import { Router } from "express";
-import { getServerInfo } from "../controllers/serverController";
+import {
+  getServerInfo,
+  getServerPlayers,
+  getServerStatus,
+} from "../controllers/serverController";
 
 const router = Router();
 
 router.get("/info", getServerInfo);
+router.get("/players", getServerPlayers);
+router.get("/status", getServerStatus);
 
 export default router;
